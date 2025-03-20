@@ -1,7 +1,8 @@
 //
-// @Author: Firstname Lastname
-// @email: fadym[at]gmail[dot]com
-// @github: https://github.com/fadym
+//
+// @Author: F.Michel
+
+// @github: https://github.com/phpdevcommunity
 package main
 
 import (
@@ -214,9 +215,9 @@ func executeLine(lineOriginal string, values *map[string]string) {
 		if len(args) < 2 {
 			pterm.Error.WithFatal().Printf("Invalid execute command: %s", line)
 		}
-		dockerComposeExec := args[1]
+		dockerComposeExec := args[1:]
 		dockerCompose := GetDockerComposeCommand()
-		run(fmt.Sprintf("%s %s", dockerCompose, dockerComposeExec), false)
+		run(fmt.Sprintf("%s %s", dockerCompose, strings.Join(dockerComposeExec, " ")), true)
 		return
 	} else if action == "wf" {
 		args := strings.Fields(line)
